@@ -1,13 +1,14 @@
 # BirthdayPartyRefactory
-Refactoring exercise
-
-## Instructions
-The purpose of this exercise is to improve the code so it is easier to work with. 
-There are a few problems in there, find and fix what you can. Don't add any additional
-functionality (unless you consider tests additional functionality), we're just checking to see how you can improve existing code.
- 
-## Getting Started
-
-Running the application: `gradle build test run`
-
-All output is written to the console.
+I have refactored the included code base located here: https://github.com/jtj/BirthdayPartyRefactor by performing the following:
+ - Functionality added to increase maintainability:
+    - Created classes for each of the following objects:
+      - CakeOrder
+      - BalloonsOrder
+      - Order
+    - Rewrote functionality constructing objects from printing objects to storing built objects.
+    - Redefined the Order parameters to be passed as arrays.
+- Added the following tests:
+    - Validating correct construction of the BalloonsOrder
+    - Validating correct construction of the CakeOrder
+    - Validating correct construction of the total order.
+    - Isolated validation of the individual sub-objects to aid with readability. 
