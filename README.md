@@ -1,4 +1,4 @@
-# BirthdayPartyRefactory
+# BirthdayPartyRefactor
 I have refactored the included code base located here: https://github.com/jtj/BirthdayPartyRefactor by performing the following:
  - Functionality added to increase maintainability:
     - Created classes for each of the following objects:
