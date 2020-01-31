@@ -7,8 +7,40 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
+
+    private void validateBalloons(BalloonsOrder balloons){
+        assertEquals(balloons.getBalloonColor(), "red");
+        assertEquals(balloons.getMaterial(), "mat");
+        assertEquals(balloons.getNumber(), "3");
+    }
+    private void validateCake(CakeOrder cake){
+        assertEquals(cake.getFlavor(), "chocolate");
+        assertEquals(cake.getFrostingFlavor(), "vanilla");
+        assertEquals(cake.getShape(), "round");
+        assertEquals(cake.getSize(), "large");
+        assertEquals(cake.getCakeColor(), "red");
+    }
+    @Test
+    public void testAppHasAGreeting() {
         App classUnderTest = new App();
         assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    }
+
+    @Test
+    public void testOrderBalloons(){
+        validateBalloons(App.orderBalloons(new String[] {"red", "mat", "3"}));
+    }
+
+    @Test
+    public void testOrderCake(){
+        validateCake(App.orderCake(new String[] {"chocolate", "vanilla", "round", "large", "red"}));
+    }
+
+    @Test
+    public void testOrder() {
+        Order order = App.order(new String[]{ "chocolate", "vanilla", "round", "large", "red"},
+                new String[] {"red", "mat", "3"});
+        validateCake(order.getCakeOrder());
+        validateBalloons(order.getBalloons());
     }
 }
