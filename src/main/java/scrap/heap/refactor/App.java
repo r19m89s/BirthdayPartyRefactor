@@ -1,12 +1,11 @@
 package scrap.heap.refactor;
 import lombok.Getter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 public class App {
-    private static List<Order> orders = new ArrayList<>();
+    private static Order order = new Order();
 
     public String getGreeting() {
         return "Hello world.";
@@ -23,12 +22,15 @@ public class App {
                 {"Vanilla", "chocelate", "square", "med", "brown"},
                 {"vanilla", "vanilla", "square", "small", "yellow"}
         };
-        for (int i = 0; i < balloonParameters.length; i++){
-            orders.add(new Order(orderCake(cakeParameters[i]), orderBalloons(balloonParameters[i])));
+        for (int i = 0; i < balloonParameters.length; i++) {
+            order.getOrderItems().add(new BalloonsOrder(balloonParameters[0]));
+        }
+        for (int j = 0; j < cakeParameters.length; j++) {
+            order.getOrderItems().add(new CakeOrder(cakeParameters[j]));
         }
     }
-    public static Order order(String[] cakeParams, String[] balloonParams){
-        return new Order( orderCake(cakeParams), orderBalloons(balloonParams));
+    public static Order order(List<OrderType> orderTypes){
+        return new Order(orderTypes);
     }
     public static BalloonsOrder orderBalloons(String[] balloonParams){
         return new BalloonsOrder(balloonParams);

@@ -1,17 +1,19 @@
 package scrap.heap.refactor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import scrap.heap.refactor.enums.Color;
+import scrap.heap.refactor.enums.Material;
 
-@AllArgsConstructor
+import java.util.Arrays;
+
 @Getter
-class BalloonsOrder {
-    private String balloonColor;
-    private String material;
-    private String number;
+class BalloonsOrder extends OrderType {
+    private Material material;
+    private Integer number;
 
     BalloonsOrder(String[] balloonParams){
-        this.balloonColor = balloonParams[0];
-        this.material = balloonParams[1];
-        this.number = balloonParams[2];
+        super(Arrays.copyOfRange(balloonParams, 0, 1));
+        this.material = Material.fromString(balloonParams[1]);
+        this.number = Integer.parseInt(balloonParams[2]);
     }
 }

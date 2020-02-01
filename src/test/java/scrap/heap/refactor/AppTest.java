@@ -4,21 +4,29 @@
 package scrap.heap.refactor;
 
 import org.junit.Test;
+import scrap.heap.refactor.enums.Color;
+import scrap.heap.refactor.enums.Flavor;
+import scrap.heap.refactor.enums.Material;
+import scrap.heap.refactor.enums.Shape;
+import scrap.heap.refactor.enums.Size;
+
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class AppTest {
 
     private void validateBalloons(BalloonsOrder balloons){
-        assertEquals(balloons.getBalloonColor(), "red");
-        assertEquals(balloons.getMaterial(), "mat");
-        assertEquals(balloons.getNumber(), "3");
+        assertEquals(balloons.getColor(), Color.RED);
+        assertEquals(balloons.getMaterial(), Material.MYLAR);
+        assertEquals(balloons.getNumber(), Integer.valueOf(3));
     }
     private void validateCake(CakeOrder cake){
-        assertEquals(cake.getFlavor(), "chocolate");
-        assertEquals(cake.getFrostingFlavor(), "vanilla");
-        assertEquals(cake.getShape(), "round");
-        assertEquals(cake.getSize(), "large");
-        assertEquals(cake.getCakeColor(), "red");
+        assertEquals(cake.getFlavor(), Flavor.CHOCOLATE);
+        assertEquals(cake.getFrostingFlavor(), Flavor.VANILLA);
+        assertEquals(cake.getShape(), Shape.CIRCLE);
+        assertEquals(cake.getSize(), Size.LARGE);
+        assertEquals(cake.getColor(), Color.RED);
     }
     @Test
     public void testAppHasAGreeting() {
@@ -28,19 +36,19 @@ public class AppTest {
 
     @Test
     public void testOrderBalloons(){
-        validateBalloons(App.orderBalloons(new String[] {"red", "mat", "3"}));
+        validateBalloons(App.orderBalloons(new String[] {"red", "mylar", "3"}));
     }
 
     @Test
     public void testOrderCake(){
-        validateCake(App.orderCake(new String[] {"chocolate", "vanilla", "round", "large", "red"}));
+        validateCake(App.orderCake(new String[] {"chocolate", "vanilla", "circle", "large", "red"}));
     }
 
     @Test
     public void testOrder() {
-        Order order = App.order(new String[]{ "chocolate", "vanilla", "round", "large", "red"},
-                new String[] {"red", "mat", "3"});
-        validateCake(order.getCakeOrder());
-        validateBalloons(order.getBalloons());
+        Order order = App.order(Arrays.asList(new CakeOrder(new String[]{ "chocolate", "vanilla", "circle", "large", "red"}),
+                new BalloonsOrder(new String[] {"red", "mylar", "3"})));
+        validateCake((CakeOrder) order.getOrderItems().get(0));
+        validateBalloons((BalloonsOrder) order.getOrderItems().get(1));
     }
 }
